@@ -1,1 +1,835 @@
-<h1>HELLO HIMZ</h1>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIMZ Insight</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .navbar { background-color: #ffffff; border-bottom: 1px solid #e2e8f0; }
+        .tree-children.collapsed { display: none; }
+        .toggle-icon { cursor: pointer; transition: transform 0.2s; display: inline-block; }
+        .toggle-icon.rotated { transform: rotate(-90deg); }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg sticky-top mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="/">📊 KIK Insight</a>
+<!--        <div class="navbar-nav ms-auto">-->
+<!--            <a class="nav-link" href="/quiz">Study</a>-->
+<!--            <a class="nav-link" href="/trace">Analysis</a>-->
+<!--        </div>-->
+    </div>
+</nav>
+
+<div class="container">
+    
+<style>
+    .section-block {
+        margin-top: 4rem;
+        border-top:1px solid #e5e7eb;
+    }
+    .about-wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 3rem 0;
+    }
+
+    .about-hero {
+        padding: 2rem 0 3rem;
+    }
+
+    .about-title {
+        font-size: 2.7rem;
+        font-weight: 800;
+        letter-spacing: -1.2px;
+        color: #1e293b;
+    }
+
+    .about-subtitle {
+        color: #64748b;
+        font-size: 1.05rem;
+        max-width: 720px;
+        line-height: 1.7;
+    }
+
+
+    .about-info{
+        /*margin-top:10px;*/
+    }
+
+    .info-group{
+        display:flex;
+        gap:16px;
+        margin-bottom:20px;
+    }
+
+    .info-icon{
+        font-size:1.4rem;
+        width:28px;
+        text-align:center;
+        margin-top:4px;
+    }
+
+    .info-content{
+        flex:1;
+    }
+
+    .info-row{
+        /*display:flex;*/
+        /*justify-content:space-between;*/
+        /*margin-bottom:6px;*/
+    }
+
+    .info-label{
+        font-size:0.9rem;
+        color:#64748b;
+    }
+
+    .info-value{
+        white-space: nowrap;
+        font-weight:700;
+        color:#1e293b;
+    }
+    .info-value-sm{
+        font-weight:500;
+        font-size:0.8rem;
+        color:#1e293b;
+    }
+
+    .about-card{
+        border:none;
+        border-radius:1.25rem;
+        box-shadow:0 4px 14px rgba(15,23,42,0.08);
+        height:100%;
+
+        display:flex;
+        flex-direction:column;
+    }
+
+    .keyword-badge {
+        display: inline-block;
+        padding: 0.45rem 0.8rem;
+        margin: 0.25rem 0.35rem 0 0;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #2563eb;
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: #0f172a;
+    }
+
+    .project-subtitle{
+        font-size:0.85rem;
+        color:#64748b;
+        margin-bottom:0.75rem;
+    }
+
+    .about-list{
+        font-size:0.8rem;
+        color:#475569;
+        padding-left: 25px;
+    }
+
+    .about-list li{
+        margin-bottom:0.5rem;
+        line-height:1.5;
+    }
+
+    .highlight-text {
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .mini-label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.75rem;
+    }
+    .hero-profile{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:30px;
+    }
+
+    .hero-text{
+        flex:1;
+    }
+
+    .hero-photo{
+        flex-shrink:0;
+    }
+
+    .profile-img{
+        width:120px;
+        height:160px;
+        object-fit:cover;
+        border-radius:12px;
+        border:3px solid #e2e8f0;
+        box-shadow:0 6px 16px rgba(0,0,0,0.08);
+    }
+    @media (max-width:768px){
+
+        .profile-img{
+            width:90px;
+            height:120px;
+        }
+
+        .about-title{
+            font-size:1.6rem;
+        }
+
+    }
+
+    /* 프로젝트 */
+    .project-meta{
+        font-size:0.8rem;
+        color:#64748b;
+    }
+    .projects-title{
+        font-size:2.2rem;
+        font-weight:900;
+        letter-spacing:2px;
+        text-align:center;
+        margin-top:1rem;
+        margin-bottom:1rem;
+    }
+
+    .project-stack-box{
+        margin-top:auto;
+        padding:0.4rem 0.6rem 0.6rem 0.6rem;
+        border-radius:1rem;
+        background:#fff7ed;
+        border:1px solid #fed7aa;
+    }
+
+    .project-stack-title{
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #c2410c;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+    }
+
+    .stack-badge{
+        display: inline-block;
+        padding: 0.45rem 0.75rem;
+        margin: 0.25rem 0.35rem 0 0;
+        border-radius: 0.75rem;
+        background: #fb923c;
+        color: #ffffff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        box-shadow: 0 2px 6px rgba(251, 146, 60, 0.25);
+    }
+
+    /* 커리어 */
+
+    .career-item{
+        display:flex;
+        gap:40px;
+        padding:30px 0;
+        border-bottom:1px solid #e5e7eb;
+    }
+
+    .career-item:first-child{
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .career-logo{
+        width:120px;
+        height:120px;
+        border-radius:50%;
+        background:#f1f5f9;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+        flex-shrink:0;
+    }
+
+    .career-logo img{
+        width:80%;
+    }
+
+    .career-content{
+        flex:1;
+    }
+
+    .career-company{
+        font-size:1.4rem;
+        font-weight:800;
+    }
+
+    .career-period{
+        font-size:0.9rem;
+        color:#64748b;
+        margin-bottom:10px;
+    }
+
+    .career-desc{
+        font-size:0.95rem;
+        color:#475569;
+        margin-bottom:15px;
+    }
+
+    .career-project{
+        border-left:3px solid #2563eb;
+        padding-left:12px;
+        margin-bottom:12px;
+    }
+
+    .career-project-title{
+        font-weight:700;
+    }
+
+    .career-project-desc{
+        font-size:0.9rem;
+        color:#64748b;
+    }
+
+    @media (max-width: 768px){
+        .career-item{
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .career-logo{
+            width: 90px;
+            height: 90px;
+        }
+    }
+
+</style>
+
+<div class="container about-wrap">
+    <div class="about-hero">
+        <div class="hero-profile">
+
+            <div class="hero-text">
+                <div class="mini-label">About Developer</div>
+
+                <h1 class="about-title">
+                    김인규 · Database Engineer
+                </h1>
+
+                <p class="about-subtitle mt-3 mb-0">
+                    ERP 실무 개발 경험을 바탕으로
+                    <span class="highlight-text">데이터 구조 이해</span>,
+                    <span class="highlight-text">SQL 실행계획 분석</span>,
+                    <span class="highlight-text">데이터 정합성과 운영 안정성</span>에 집중하는 엔지니어입니다.
+
+                    애플리케이션 개발 경험을 기반으로
+                    <span class="highlight-text">DB 설계</span>,
+                    <span class="highlight-text">성능 문제 분석</span>,
+                    <span class="highlight-text">대용량 데이터 처리 구조</span>를 이해하며
+                    DBA와 데이터 아키텍처 영역으로 전문성을 확장하고 있습니다.
+                </p>
+            </div>
+
+            <div class="hero-photo">
+                <img src="/static/image/김인규(3x4cm).jpg"
+                     alt="profile"
+                     class="profile-img">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-6">
+            <div class="card about-card p-4">
+                <div class="section-title">About Me</div>
+
+                <div class="row g-4 about-info">
+                    <div class=" col-5">
+                        <div class="info-group">
+                            <div class="info-icon">
+                                <i data-lucide="user"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-row">
+                                    <span class="info-label">이름</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-value">김인규</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-group">
+                            <div class="info-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-row">
+                                    <span class="info-label">위치</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-value">대한민국 서울</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-group"><div class="info-icon">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                            <div class="info-content">
+                                <div class="info-row">
+                                    <span class="info-label">최종학력</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-value">컴퓨터공학 학사</span>
+                                    <br>
+                                    <span class="info-value-sm">(학점은행)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" col-7">
+                        <div class="info-group">
+                            <div class="info-icon">
+                                <i data-lucide="calendar"></i>
+                            </div>
+
+                            <div class="info-content">
+                                <div class="info-row">
+                                    <span class="info-label">생년월일</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-value">1998.03.05</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-group">
+                            <div class="info-icon">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-row">
+                                    <span class="info-label">연락처</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-value">010-2499-5221</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-group">
+                            <div class="info-icon">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-row">
+                                    <span class="info-label">Email</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-value">himz5221</span>
+                                    <span class="info-value">@naver.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card about-card p-4">
+                <div class="section-title">Tech Stack</div>
+                <div>
+                    <span class="keyword-badge">MSSQL</span>
+                    <span class="keyword-badge">Oracle</span>
+                    <span class="keyword-badge">PostgreSQL</span>
+                    <span class="keyword-badge">Java</span>
+                    <span class="keyword-badge">JSP</span>
+                    <span class="keyword-badge">Spring</span>
+                    <span class="keyword-badge">Python</span>
+                    <span class="keyword-badge">FastAPI</span>
+                    <span class="keyword-badge">SQL Tuning</span>
+                    <span class="keyword-badge">Linux</span>
+                    <span class="keyword-badge">GitLab CI/CD</span>
+                    <span class="keyword-badge">Docker</span>
+                    <span class="keyword-badge">Nginx</span>
+                    <span class="keyword-badge">HTML · JS · CSS</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-block">
+
+    <div class="projects-header text-center mb-3 ">
+        <h2 class="projects-title">PROJECTS</h2>
+    </div>
+    <p class="text-muted text-center mb-5">
+        실무와 개인 프로젝트에서 수행한 주요 기술 경험입니다.
+    </p>
+
+        <div class="row g-4">
+
+            <div class="col-lg-6">
+                <div class="card about-card p-4">
+
+                    <div class="section-title">HIMZ Insight</div>
+                    <div class="project-subtitle">
+                    Personal Developer Platform · Data / Trace Analysis
+                    </div>
+
+                    <ul class="about-list">
+                        <li>
+                        <span class="highlight-text">기술 게시판 · Playground · Dev Tools · 데이터 시각화</span>
+                        통합 개인 개발 플랫폼
+                        </li>
+
+                        <li>
+                        <span class="highlight-text">SQL Trace 기반 성능 분석</span>
+                        결과를 시각화하는 Trace Analysis 모듈 설계
+                        </li>
+
+                        <li>
+                        향후
+                        <span class="highlight-text">대용량 데이터 적재 및 시계열 그래프 분석</span>
+                        기능 확장 예정
+                        </li>
+                    </ul>
+
+                    <div class="project-stack-box">
+                        <span class="stack-badge">Python</span>
+                        <span class="stack-badge">FastAPI</span>
+                        <span class="stack-badge">PostgreSQL</span>
+                        <span class="stack-badge">AWS</span>
+                        <span class="stack-badge">Nginx</span>
+                        <span class="stack-badge">Docker</span>
+                        <span class="stack-badge">HTML/CSS</span>
+                        <span class="stack-badge">JavaScript</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card about-card p-4">
+
+                    <div class="section-title">개발 인프라 환경 구축</div>
+
+                    <div class="project-subtitle">
+                        이젠솔루션 · DevOps · CI/CD · Container Platform
+                    </div>
+
+                    <ul class="about-list">
+
+                        <li>
+                            사내 개발 환경 개선을 위해
+                            <span class="highlight-text">Rocky Linux 기반 서버 환경</span>
+                            구축
+                        </li>
+
+                        <li>
+                            <span class="highlight-text">GitLab / GitLab Runner</span>
+                            기반
+                            <span class="highlight-text">CI/CD 자동 배포 파이프라인</span>
+                            구성
+                        </li>
+
+                        <li>
+                            <span class="highlight-text">Docker / Portainer</span>
+                            기반 컨테이너 관리 환경 구축
+                        </li>
+
+                        <li>
+                            <span class="highlight-text">Nginx Reverse Proxy</span>
+                            구성 및 서비스 배포 환경 개선
+                        </li>
+
+                    </ul>
+
+                    <div class="project-stack-box">
+                        <span class="stack-badge">Rocky Linux</span>
+                        <span class="stack-badge">Docker</span>
+                        <span class="stack-badge">Portainer</span>
+                        <span class="stack-badge">GitLab</span>
+                        <span class="stack-badge">GitLab Runner</span>
+                        <span class="stack-badge">Nginx</span>
+                        <span class="stack-badge">CI/CD</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card about-card p-4">
+
+                    <div class="section-title">사내 개발 프레임워크 개발</div>
+
+                    <div class="project-subtitle">
+                        이젠솔루션 · Developer Productivity · Development Standardization
+                    </div>
+
+                <ul class="about-list">
+
+                    <li>
+                    ERP / MES 개발 생산성 향상을 위해
+                    <span class="highlight-text">사내 개발 프레임워크</span>
+                    설계 및 구축
+                    </li>
+
+                    <li>
+                    <span class="highlight-text">CRUD 템플릿 및 공통 UI 컴포넌트</span>
+                    구성
+                    </li>
+
+                    <li>
+                    <span class="highlight-text">공통 JavaScript 유틸리티</span>
+                    정리 및 반복 로직 모듈화
+                    </li>
+
+                    <li>
+                    <span class="highlight-text">DB 컬럼 도메인 표준화</span>
+                    및
+                    <span class="highlight-text">팝업 데이터 재사용 구조</span>
+                    설계
+                    </li>
+
+                </ul>
+
+                <div class="project-stack-box">
+                    <span class="stack-badge">Java</span>
+                    <span class="stack-badge">JSP</span>
+                    <span class="stack-badge">JavaScript</span>
+                    <span class="stack-badge">Toast Grid</span>
+                    <span class="stack-badge">MSSQL</span>
+                    <span class="stack-badge">Oracle</span>
+                </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card about-card p-4">
+
+                    <div class="section-title">ERP SYSTEM 구축</div>
+
+                    <div class="project-subtitle">
+                        동인바이오텍 · ERP System · Database Design
+                    </div>
+
+                    <ul class="about-list">
+                        <li>
+                        <span class="highlight-text">업무 분석 · DB 설계 · Full-Stack 개발</span>
+                        ERP 시스템 구축 프로젝트 수행
+                        </li>
+
+                        <li>
+                        <span class="highlight-text">2,000만 건 규모 데이터</span>
+                        검색 성능
+                        <span class="highlight-text">10초 → 0.2초</span>
+                        개선
+                        </li>
+
+                        <li>
+                        <span class="highlight-text">실행계획 기반 SQL 튜닝</span>
+                        및
+                        <span class="highlight-text">인덱스 전략 재설계</span>
+                        </li>
+                    </ul>
+
+                    <div class="project-stack-box">
+                        <span class="stack-badge">MSSQL</span>
+                        <span class="stack-badge">Oracle</span>
+                        <span class="stack-badge">Java</span>
+                        <span class="stack-badge">JSP</span>
+                        <span class="stack-badge">JavaScript</span>
+                        <span class="stack-badge">HTML/CSS</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="section-block">
+
+        <div class="projects-header text-center mb-3 ">
+
+            <h2 class="projects-title">CAREER</h2>
+        </div>
+<!--        <p class="text-muted text-center mb-2">-->
+<!--            실무에서 수행한 주요 업무와 프로젝트 이력입니다.-->
+<!--        </p>-->
+
+
+        <div class="career-item">
+
+            <div class="career-logo">
+                <img src="/static/image/ezen_logo.png">
+            </div>
+
+            <div class="career-content">
+
+                <div class="career-company">이젠솔루션</div>
+
+                <div class="career-period">
+                2023.09 – 2026.01 (2년 7개월)
+                </div>
+
+                <div class="career-desc">
+                ERP / MES 시스템 개발 및 운영, DB 설계와 SQL 성능 개선 중심 업무 수행
+                </div>
+
+
+                <div class="career-project">
+                <div class="career-project-title">
+                ERP 시스템 개발 및 운영
+                </div>
+
+                <div class="career-project-desc">
+                ERP 업무 분석, DB 설계, 기능 개발 및 운영 안정화
+                </div>
+                </div>
+
+
+                <div class="career-project">
+                <div class="career-project-title">
+                개발 인프라 환경 구축
+                </div>
+                <div class="career-project-desc">
+                Rocky Linux 기반 서버 구축, GitLab / Runner 기반 CI/CD 자동 배포 환경 구성
+                </div>
+                </div>
+
+
+                <div class="career-project">
+                <div class="career-project-title">
+                사내 개발 프레임워크 구축
+                </div>
+                <div class="career-project-desc">
+                CRUD 템플릿, 공통 JS 유틸리티, DB 도메인 표준화 등 사내 직원의 업무 효율 개선
+                </div>
+                </div>
+
+
+                <div class="career-project">
+                    <div class="career-project-title">
+                    SQL 성능 개선 및 튜닝 지원
+                    </div>
+                    <div class="career-project-desc">
+                    여러 프로젝트에서 발생하는 SQL 성능 문제를 분석하고 실행계획 기반 튜닝 수행.
+                    팀원 및 팀장으로부터 지속적인 성능 개선 요청을 받아 쿼리 구조 개선 및 인덱스 전략 수립 지원
+                    </div>
+                </div>
+
+
+                <div class="career-project">
+                    <div class="career-project-title">
+                    DB 운영 관리 및 성능 유지
+                    </div>
+
+                    <div class="career-project-desc">
+                    인덱스 관리, 조각화 관리, DB 구조 점검 등 운영 환경의 안정성과 성능 유지 담당
+                    </div>
+                </div>
+
+
+                <div class="career-project">
+
+                <div class="career-project-title">
+                개발 코드 리뷰 및 기술 지원
+                </div>
+
+                <div class="career-project-desc">
+                팀 내 SQL 작성 방식과 DB 접근 로직에 대한 코드 리뷰 수행,
+                개발자 대상 SQL 작성 및 성능 개선 방법 교육 진행
+                </div>
+
+                </div>
+
+
+                <div class="career-project">
+
+                <div class="career-project-title">
+                DB 표준화 및 지식 공유
+                </div>
+
+                <div class="career-project-desc">
+                DB 컬럼 도메인 관리 담당 및 데이터 구조 표준화 진행,
+                SQL 튜닝 사례와 개발 가이드 문서화 및 팀 내 지식 공유 활동 수행
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="section-block">
+        <div class="card about-card p-4">
+            <div class="section-title">Focus</div>
+            <p class="mb-2 text-secondary" style="line-height: 1.8;">
+                저는 데이터베이스를 단순 저장소가 아니라,
+                <span class="highlight-text">시스템 품질과 안정성을 결정하는 핵심 축</span>으로 봅니다.
+                그래서 쿼리 하나를 작성하더라도 실행계획, I/O 특성, 인덱스 구조,
+                동시성 제어까지 함께 고려하는 개발 방식을 지향합니다.
+            </p>
+            <p class="mb-0 text-secondary" style="line-height: 1.8;">
+                현재는 <span class="highlight-text">DB 성능 분석</span>,
+                <span class="highlight-text">운영 안정성</span>,
+                <span class="highlight-text">RDBMS 내부 동작 이해</span>를 중심으로 꾸준히 확장하고 있습니다.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<script>
+    async function apiRequest(url, formData) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData
+            });
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('분석 중 오류가 발생했습니다.');
+        }
+    }
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
